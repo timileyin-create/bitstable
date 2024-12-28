@@ -215,3 +215,14 @@
         )
     ))
 )
+
+;; Oracle Functions
+(define-public (update-price (new-price uint))
+    (begin
+        (asserts! (is-authorized-oracle tx-sender) err-owner-only)
+        (asserts! (is-valid-price new-price) err-invalid-parameter)
+        (var-set last-price new-price)
+        (var-set price-valid true)
+        (ok true)
+    )
+)
