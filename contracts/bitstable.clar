@@ -318,3 +318,22 @@
         (ok (/ (* collateral (var-get last-price)) debt))
     ))
 )
+
+(define-read-only (is-authorized-liquidator (address principal))
+    (default-to false (map-get? liquidators address))
+)
+
+(define-read-only (is-authorized-oracle (address principal))
+    (default-to false (map-get? price-oracles address))
+)
+
+(define-read-only (get-stability-parameters)
+    {
+        minimum-collateral-ratio: (var-get minimum-collateral-ratio),
+        liquidation-ratio: (var-get liquidation-ratio),
+        stability-fee: (var-get stability-fee),
+        price: (var-get last-price),
+        price-valid: (var-get price-valid),
+        emergency-shutdown: (var-get emergency-shutdown)
+    }
+)
