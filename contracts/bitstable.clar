@@ -53,3 +53,22 @@
 
 (define-map liquidators principal bool)
 (define-map price-oracles principal bool)
+
+;; Validation Functions
+(define-private (is-valid-price (price uint))
+    (and 
+        (>= price minimum-price)
+        (<= price maximum-price)
+    )
+)
+
+(define-private (is-valid-ratio (ratio uint))
+    (and 
+        (>= ratio minimum-ratio)
+        (<= ratio maximum-ratio)
+    )
+)
+
+(define-private (is-valid-fee (fee uint))
+    (<= fee maximum-fee)
+)
